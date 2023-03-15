@@ -10,7 +10,7 @@ export interface CreateUsersDTO {
 export class Users {
   private userProps?: CreateUsersDTO;
 
-  constructor(userId?: string, createdat?: Date) {
+  constructor(createdat?: Date) {
     this.userProps.createdAt = createdat ?? new Date();
   }
 
