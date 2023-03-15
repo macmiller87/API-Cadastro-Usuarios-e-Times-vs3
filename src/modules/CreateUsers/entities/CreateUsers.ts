@@ -15,35 +15,35 @@ export class Users {
   }
 
   public set userName(userName: string) {
-    this.userName = userName;
+    this.userProps.userName = userName;
   }
 
   public get userName(): string {
-    return this.userName;
+    return this.userProps.userName;
   }
 
   public set userAvatar(userAvatar: string) {
-    this.userAvatar = userAvatar;
+    this.userProps.userAvatar = userAvatar;
   }
 
   public get userAvatar(): string {
-    return this.userAvatar;
+    return this.userProps.userAvatar;
   }
 
   public set email(email: string) {
-    this.email = email;
+    this.userProps.email = email;
   }
 
   public get email(): string {
-    return this.email;
+    return this.userProps.email;
   }
 
   public set password(password: string) {
-    this.password = password;
+    this.userProps.password = password;
   }
 
   public get password(): string {
-    return this.password;
+    return this.userProps.password;
   }
 
   public get createdAt(): Date {
