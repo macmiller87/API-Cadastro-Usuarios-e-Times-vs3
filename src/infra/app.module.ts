@@ -1,13 +1,23 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from 'src/database/database.module';
+import { UserController } from '../controller/User.controller';
+import { TeamController } from '../controller/Team.controller';
+import { UserDatabaseModule } from 'src/database/user_database.module';
 import { CreateUsers } from 'src/modules/CreateUsers/useCases/CreateUsers.ts/CreateUsers';
 import { ListSpecifcUser } from 'src/modules/CreateUsers/useCases/ListUser/ListSpecifcUser';
-
-import { AppController } from '../controller/app.controller';
+import { ListUsersAndTeams } from 'src/modules/CreateUsers/useCases/ListUsersAndTeams/ListUsersAndTeams';
+import { CreateTeams } from 'src/modules/CreateUserTeams/useCases/CreateTeams/CreateTeams';
+import { TeamDatabaseModule } from 'src/database/team-database.module';
 
 @Module({
-  imports: [DatabaseModule],
-  controllers: [AppController],
-  providers: [CreateUsers, ListSpecifcUser],
+  imports: [UserDatabaseModule, TeamDatabaseModule],
+  controllers: [UserController, TeamController],
+  // eslint-disable-next-line prettier/prettier
+  providers: [
+    CreateUsers, 
+    ListSpecifcUser, 
+    ListUsersAndTeams,
+
+    CreateTeams
+  ],
 })
 export class AppModule {}

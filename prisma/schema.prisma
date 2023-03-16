@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Users {
-  user_id     String @id @default(uuid())
+  user_id     String @id 
   userName    String @unique
   userAvatar  String
   email       String
@@ -22,7 +22,7 @@ model Users {
 }
 
 model Teams {
-  team_id   String  @id
+  team_id   String  @id @default(uuid())
   userId    String
   TeamName  String
   city      String
