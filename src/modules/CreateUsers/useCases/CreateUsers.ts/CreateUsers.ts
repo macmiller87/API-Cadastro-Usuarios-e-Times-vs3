@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import { Injectable } from '@nestjs/common';
 import { AppError } from 'src/errors/AppError';
 import { CreateUsersDTO, Users } from '../../entities/CreateUsers';
@@ -17,6 +18,7 @@ export class CreateUsers {
     }
 
     const user = this.userRepositoy.create({
+      user_id: randomUUID(),
       userName,
       userAvatar,
       email,

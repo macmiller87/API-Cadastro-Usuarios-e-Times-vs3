@@ -14,6 +14,14 @@ export class Users {
     this.userProps.createdAt = createdat ?? new Date();
   }
 
+  public set user_id(user_id: string) {
+    this.userProps.user_id = user_id;
+  }
+
+  public get user_id(): string {
+    return this.userProps.user_id;
+  }
+
   public set userName(userName: string) {
     this.userProps.userName = userName;
   }
