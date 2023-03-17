@@ -11,23 +11,29 @@ datasource db {
 }
 
 model Users {
-  user_id     String @id 
-  userName    String @unique
-  userAvatar  String
-  email       String
-  password    String
-  createdAt   DateTime @default(now())
-  teams Teams[]
-
+  user_id    String      @id
+  userName   String      @unique
+  userAvatar String
+  email      String
+  password   String
+  createdAt  DateTime    @default(now())
+  teams      Teams[]
+  UserToken  UserToken[]
 }
 
 model Teams {
-  team_id   String  @id @default(uuid())
-  userId    String
+  team_id   String   @id @default(uuid())
+  user_id   String
   TeamName  String
   city      String
   country   String
   createdAt DateTime @default(now())
-  user Users @relation(fields: [userId], references: [user_id])
+  user      Users    @relation(fields: [user_id], references: [user_id])
+}
 
+model UserToken {
+  id        String   @id @default(uuid())
+  user_id   String
+  createdAt DateTime @default(now())
+  user      Users    @relation(fields: [user_id], references: [user_id])
 }
