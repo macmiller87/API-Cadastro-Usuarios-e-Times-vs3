@@ -24,16 +24,16 @@ model Users {
 model Teams {
   team_id   String   @id @default(uuid())
   user_id   String
-  TeamName  String
+  TeamName  String   @unique
   city      String
   country   String
   createdAt DateTime @default(now())
-  user      Users    @relation(fields: [user_id], references: [user_id])
+  user      Users    @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 }
 
 model UserToken {
   id        String   @id @default(uuid())
   user_id   String
   createdAt DateTime @default(now())
-  user      Users    @relation(fields: [user_id], references: [user_id])
+  user      Users    @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 }
