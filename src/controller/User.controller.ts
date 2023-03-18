@@ -1,6 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+// eslint-disable-next-line prettier/prettier
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateUsersDTO } from 'src/modules/CreateUsers/dtosClassValidation/CreateUsersDTO';
-import { CreateUsers } from 'src/modules/CreateUsers/useCases/CreateUsers.ts/CreateUsers';
+import { CreateUserTokenDTO } from 'src/modules/CreateUsers/dtosClassValidation/CreateUserTokenDTO';
+import { AuthenticateUsersToken } from 'src/modules/CreateUsers/useCases/CreateUsersToken/CreateUsersToken';
+import { CreateUsers } from 'src/modules/CreateUsers/useCases/CreateUsers/CreateUsers';
+import { DeleteUsers } from 'src/modules/CreateUsers/useCases/DeleteUsers/DeleteUsers';
 import { ListSpecifcUser } from 'src/modules/CreateUsers/useCases/ListUser/ListSpecifcUser';
 import { ListUsersAndTeams } from 'src/modules/CreateUsers/useCases/ListUsersAndTeams/ListUsersAndTeams';
 
@@ -10,6 +14,8 @@ export class UserController {
     private createUsers: CreateUsers,
     private listSpecifcUser: ListSpecifcUser,
     private listUserAndTeams: ListUsersAndTeams,
+    private deleteUser: DeleteUsers,
+    private createUserToken: AuthenticateUsersToken,
   ) {}
 
   @Post()
@@ -26,6 +32,21 @@ export class UserController {
     return user;
   }
 
+  @Post('userToken')
+  async createToken(@Body() body: CreateUserTokenDTO) {
+    const { email, password } = body;
+
+    const { user, token } = await this.createUserToken.execute({
+      email,
+      password,
+    });
+
+    return {
+      user,
+      token,
+    };
+  }
+
   @Get('listSpecificUser/:user_id')
   async listUser(@Param('user_id') user_id: string) {
     const userById = await this.listSpecifcUser.execute(user_id);
@@ -38,5 +59,10 @@ export class UserController {
     const user = await this.listUserAndTeams.execute(user_id);
 
     return user;
+  }
+
+  @Delete('deleteUser/:user_id')
+  async DeleteUsers(@Param('user_id') user_id: string) {
+    await this.deleteUser.execute(user_id);
   }
 }
