@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AppError } from 'src/errors/AppError';
+import { AppError } from 'src/utils/errors/AppError';
 import { Users } from '../../entities/CreateUsers';
 import { IUsersRepository } from '../../repositories/Implementation-IUserRepository/IUsersRepository';
 
