@@ -1,12 +1,5 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Request,
-} from '@nestjs/common';
+// eslint-disable-next-line prettier/prettier
+import { Body, Controller, Delete, Get, Param, Post, Request } from '@nestjs/common';
 import { CreateTeams } from 'src/modules/CreateUserTeams/useCases/CreateTeams/CreateTeams';
 import { DeleteTeam } from 'src/modules/CreateUserTeams/useCases/DeleteTeams/DeleteTeam';
 import { ListSpecificTeam } from 'src/modules/CreateUserTeams/useCases/ListTeam/ListSpecificTeam';
