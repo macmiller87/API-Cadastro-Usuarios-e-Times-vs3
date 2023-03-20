@@ -30,6 +30,16 @@ export class TeamsRepository implements ITeamsRepository {
     return team;
   }
 
+  async findTeamById(team_id: string): Promise<Teams> {
+    const team = await this.prismaService.teams.findUnique({
+      where: {
+        team_id: team_id,
+      },
+    });
+
+    return team;
+  }
+
   async listSpecificTeam(team_id: string): Promise<Teams> {
     const team = await this.prismaService.teams.findUnique({
       where: {
@@ -38,5 +48,13 @@ export class TeamsRepository implements ITeamsRepository {
     });
 
     return team;
+  }
+
+  async deleteTeam(team_id: string): Promise<void> {
+    await this.prismaService.teams.delete({
+      where: {
+        team_id: team_id,
+      },
+    });
   }
 }

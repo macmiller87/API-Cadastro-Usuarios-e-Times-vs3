@@ -13,6 +13,7 @@ import { AuthenticateUsersToken } from 'src/modules/CreateUsers/useCases/CreateU
 import { UserTokenDatabaseModule } from 'src/database/userToken-database.module';
 import { ensureUserAuthenticate } from 'src/utils/auth/EnsureUserAuthenticate';
 import { ListSpecificTeam } from 'src/modules/CreateUserTeams/useCases/ListTeam/ListSpecificTeam';
+import { DeleteTeam } from 'src/modules/CreateUserTeams/useCases/DeleteTeams/DeleteTeam';
 
 @Module({
   imports: [UserDatabaseModule, TeamDatabaseModule, UserTokenDatabaseModule],
@@ -27,6 +28,7 @@ import { ListSpecificTeam } from 'src/modules/CreateUserTeams/useCases/ListTeam/
 
     CreateTeams,
     ListSpecificTeam,
+    DeleteTeam,
   ],
 })
 export class AppModule implements NestModule {

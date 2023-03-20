@@ -1,5 +1,14 @@
-import { Body, Controller, Get, Param, Post, Request } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Request,
+} from '@nestjs/common';
 import { CreateTeams } from 'src/modules/CreateUserTeams/useCases/CreateTeams/CreateTeams';
+import { DeleteTeam } from 'src/modules/CreateUserTeams/useCases/DeleteTeams/DeleteTeam';
 import { ListSpecificTeam } from 'src/modules/CreateUserTeams/useCases/ListTeam/ListSpecificTeam';
 import { CreateTeamsDTO } from '../modules/CreateUserTeams/dtosClassValidation/CreateTeamsDTO';
 
@@ -8,6 +17,7 @@ export class TeamController {
   constructor(
     private createTeam: CreateTeams,
     private listSpecificTeam: ListSpecificTeam,
+    private deleteTeam: DeleteTeam,
   ) {}
 
   @Post()
@@ -31,5 +41,10 @@ export class TeamController {
     const team = await this.listSpecificTeam.execute(team_id);
 
     return team;
+  }
+
+  @Delete('deleteTeam/:team_id')
+  async DeleteTeam(@Param('team_id') team_id: string) {
+    await this.deleteTeam.execute(team_id);
   }
 }
