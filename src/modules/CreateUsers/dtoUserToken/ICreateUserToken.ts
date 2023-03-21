@@ -1,4 +1,4 @@
-import { Users } from '../entities/CreateUsers';
+import { Users } from '@modules/CreateUsers/entities/CreateUsers';
 
 export interface ICreateUserTokenDTO {
   token: string;

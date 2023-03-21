@@ -1,11 +1,11 @@
+import { IUsersTokenRepository } from '@modules/CreateUsers/repositories/Implementation-IUserRepository/IUsersTokenRepository';
+import { IUsersRepository } from '@modules/CreateUsers/repositories/Implementation-IUserRepository/IUsersRepository';
+import { ICreateUserTokenDTO } from '@modules/CreateUsers/dtoUserToken/ICreateUserToken';
+import AuthConfig from '@utils/config/AuthConfig';
+import { AppError } from '@utils/errors/AppError';
 import { Injectable } from '@nestjs/common';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import AuthConfig from 'src/utils/config/AuthConfig';
-import { AppError } from 'src/utils/errors/AppError';
-import { ICreateUserTokenDTO } from '../../dtoUserToken/ICreateUserToken';
-import { IUsersRepository } from '../../repositories/Implementation-IUserRepository/IUsersRepository';
-import { IUsersTokenRepository } from '../../repositories/Implementation-IUserRepository/IUsersTokenRepository';
 
 export interface IRequest {
   email: string;

@@ -1,8 +1,7 @@
+import { ITeamsRepository } from '@modules/CreateUserTeams/repositories/implementation-ITeamsRepository/ITeamsRepository';
+import { Teams } from '@modules/CreateUserTeams/entities/CreateTeams';
 import { Injectable } from '@nestjs/common';
-import { AppError } from 'src/utils/errors/AppError';
-import { Teams } from '../../entities/CreateTeams';
-import { ITeamsRepository } from '../../repositories/implementation-ITeamsRepository/ITeamsRepository';
-
+import { AppError } from '@utils/errors/AppError';
 @Injectable()
 export class ListSpecificTeam {
   constructor(private teamRepository: ITeamsRepository) {}

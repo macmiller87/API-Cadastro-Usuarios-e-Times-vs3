@@ -1,4 +1,5 @@
-import { CreateUsersDTO, Users } from '../../entities/CreateUsers';
+// eslint-disable-next-line prettier/prettier
+import { CreateUsersDTO, Users } from '@modules/CreateUsers/entities/CreateUsers';
 
 export abstract class IUsersRepository {
   // eslint-disable-next-line prettier/prettier

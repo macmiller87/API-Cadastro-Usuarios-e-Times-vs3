@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
-import AuthConfig from '../config/AuthConfig';
-import { AppError } from '../errors/AppError';
+import AuthConfig from '@utils/config/AuthConfig';
+import { AppError } from '@utils/errors/AppError';
 
 interface IPayload {
   sub: string;

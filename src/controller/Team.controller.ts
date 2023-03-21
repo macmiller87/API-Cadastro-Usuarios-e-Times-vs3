@@ -1,9 +1,9 @@
 // eslint-disable-next-line prettier/prettier
 import { Body, Controller, Delete, Get, Param, Post, Request } from '@nestjs/common';
-import { CreateTeams } from 'src/modules/CreateUserTeams/useCases/CreateTeams/CreateTeams';
-import { DeleteTeam } from 'src/modules/CreateUserTeams/useCases/DeleteTeams/DeleteTeam';
-import { ListSpecificTeam } from 'src/modules/CreateUserTeams/useCases/ListTeam/ListSpecificTeam';
-import { CreateTeamsDTO } from '../modules/CreateUserTeams/dtosClassValidation/CreateTeamsDTO';
+import { CreateTeams } from '@modules/CreateUserTeams/useCases/CreateTeams/CreateTeams';
+import { DeleteTeam } from '@modules/CreateUserTeams/useCases/DeleteTeams/DeleteTeam';
+import { ListSpecificTeam } from '@modules/CreateUserTeams/useCases/ListTeam/ListSpecificTeam';
+import { CreateTeamsDTO } from '@modules/CreateUserTeams/dtosClassValidation/CreateTeamsDTO';
 
 @Controller('teams')
 export class TeamController {

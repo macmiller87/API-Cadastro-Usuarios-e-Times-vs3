@@ -1,7 +1,7 @@
+import { IUsersRepository } from '@modules/CreateUsers/repositories/Implementation-IUserRepository/IUsersRepository';
+import { Users } from '@modules/CreateUsers/entities/CreateUsers';
 import { Injectable } from '@nestjs/common';
-import { AppError } from 'src/utils/errors/AppError';
-import { Users } from '../../entities/CreateUsers';
-import { IUsersRepository } from '../../repositories/Implementation-IUserRepository/IUsersRepository';
+import { AppError } from '@utils/errors/AppError';
 
 @Injectable()
 export class ListSpecifcUser {

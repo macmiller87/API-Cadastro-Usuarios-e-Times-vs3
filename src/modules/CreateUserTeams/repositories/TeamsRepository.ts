@@ -1,8 +1,8 @@
+// eslint-disable-next-line prettier/prettier
+import { CreateTeamsDTO, Teams } from '@modules/CreateUserTeams/entities/CreateTeams'
+import { ITeamsRepository } from '@modules/CreateUserTeams/repositories/implementation-ITeamsRepository/ITeamsRepository';
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma/prisma.service';
-import { CreateTeamsDTO, Teams } from '../entities/CreateTeams';
-import { ITeamsRepository } from './implementation-ITeamsRepository/ITeamsRepository';
-
+import { PrismaService } from '@database/prisma/prisma.service';
 @Injectable()
 export class TeamsRepository implements ITeamsRepository {
   constructor(private prismaService: PrismaService) {}

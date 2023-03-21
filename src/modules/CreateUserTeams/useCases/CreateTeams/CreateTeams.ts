@@ -1,8 +1,9 @@
+// eslint-disable-next-line prettier/prettier
+import { CreateTeamsDTO, Teams } from '@modules/CreateUserTeams/entities/CreateTeams';
+import { ITeamsRepository } from '@modules/CreateUserTeams/repositories/implementation-ITeamsRepository/ITeamsRepository';
 import { Injectable } from '@nestjs/common';
-import { AppError } from 'src/utils/errors/AppError';
-import { IUsersRepository } from 'src/modules/CreateUsers/repositories/Implementation-IUserRepository/IUsersRepository';
-import { CreateTeamsDTO, Teams } from '../../entities/CreateTeams';
-import { ITeamsRepository } from '../../repositories/implementation-ITeamsRepository/ITeamsRepository';
+import { AppError } from '@utils/errors/AppError';
+import { IUsersRepository } from '@modules/CreateUsers/repositories/Implementation-IUserRepository/IUsersRepository';
 
 @Injectable()
 export class CreateTeams {

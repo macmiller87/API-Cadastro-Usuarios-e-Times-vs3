@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma/prisma.service';
-import { IcreateUserToken } from '../dtoUserToken/ICreateUserToken';
-import { UserToken } from '../entities/CreateUsersToken';
-import { IUsersTokenRepository } from './Implementation-IUserRepository/IUsersTokenRepository';
+import { PrismaService } from '@database/prisma/prisma.service';
+import { IcreateUserToken } from '@modules/CreateUsers/dtoUserToken/ICreateUserToken';
+import { UserToken } from '@modules/CreateUsers/entities/CreateUsersToken';
+import { IUsersTokenRepository } from '@modules/CreateUsers/repositories/Implementation-IUserRepository/IUsersTokenRepository';
 
 @Injectable()
 export class UsersTokenRepository implements IUsersTokenRepository {

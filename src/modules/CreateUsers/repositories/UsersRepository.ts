@@ -1,7 +1,8 @@
+// eslint-disable-next-line prettier/prettier
+import { CreateUsersDTO, Users } from '@modules/CreateUsers/entities/CreateUsers';
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma/prisma.service';
-import { CreateUsersDTO, Users } from '../entities/CreateUsers';
-import { IUsersRepository } from './Implementation-IUserRepository/IUsersRepository';
+import { PrismaService } from '@database/prisma/prisma.service';
+import { IUsersRepository } from '@modules/CreateUsers/repositories/Implementation-IUserRepository/IUsersRepository';
 
 @Injectable()
 export class UsersRepository implements IUsersRepository {

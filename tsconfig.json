@@ -19,6 +19,12 @@
       "strictBindCallApply": false,
       "strictPropertyInitialization": false,
       "forceConsistentCasingInFileNames": false,
-      "noFallthroughCasesInSwitch": false
+      "noFallthroughCasesInSwitch": false,
+      "paths": {
+        "@controller/*": ["./src/controller/*"], 
+        "@database/*": ["./src/database/*"], 
+        "@modules/*": ["./src/modules/*"], 
+        "@utils/*": ["./src/utils/*"], 
+      }
     }
   }

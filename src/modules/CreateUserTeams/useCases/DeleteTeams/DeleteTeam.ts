@@ -1,7 +1,6 @@
+import { ITeamsRepository } from '@modules/CreateUserTeams/repositories/implementation-ITeamsRepository/ITeamsRepository';
 import { Injectable } from '@nestjs/common';
-import { AppError } from 'src/utils/errors/AppError';
-import { ITeamsRepository } from '../../repositories/implementation-ITeamsRepository/ITeamsRepository';
-
+import { AppError } from '@utils/errors/AppError';
 @Injectable()
 export class DeleteTeam {
   constructor(private teamRepository: ITeamsRepository) {}

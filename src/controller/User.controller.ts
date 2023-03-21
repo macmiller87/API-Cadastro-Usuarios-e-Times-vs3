@@ -1,12 +1,12 @@
 // eslint-disable-next-line prettier/prettier
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { CreateUsersDTO } from 'src/modules/CreateUsers/dtosClassValidation/CreateUsersDTO';
-import { CreateUserTokenDTO } from 'src/modules/CreateUsers/dtosClassValidation/CreateUserTokenDTO';
-import { AuthenticateUsersToken } from 'src/modules/CreateUsers/useCases/CreateUsersToken/CreateUsersToken';
-import { CreateUsers } from 'src/modules/CreateUsers/useCases/CreateUsers/CreateUsers';
-import { DeleteUsers } from 'src/modules/CreateUsers/useCases/DeleteUsers/DeleteUsers';
-import { ListSpecifcUser } from 'src/modules/CreateUsers/useCases/ListUser/ListSpecifcUser';
-import { ListUsersAndTeams } from 'src/modules/CreateUsers/useCases/ListUsersAndTeams/ListUsersAndTeams';
+import { CreateUsersDTO } from '@modules/CreateUsers/dtosClassValidation/CreateUsersDTO';
+import { CreateUserTokenDTO } from '@modules/CreateUsers/dtosClassValidation/CreateUserTokenDTO';
+import { AuthenticateUsersToken } from '@modules/CreateUsers/useCases/CreateUsersToken/CreateUsersToken';
+import { CreateUsers } from '@modules/CreateUsers/useCases/CreateUsers/CreateUsers';
+import { DeleteUsers } from '@modules/CreateUsers/useCases/DeleteUsers/DeleteUsers';
+import { ListSpecifcUser } from '@modules/CreateUsers/useCases/ListUser/ListSpecifcUser';
+import { ListUsersAndTeams } from '@modules/CreateUsers/useCases/ListUsersAndTeams/ListUsersAndTeams';
 
 @Controller('users')
 export class UserController {

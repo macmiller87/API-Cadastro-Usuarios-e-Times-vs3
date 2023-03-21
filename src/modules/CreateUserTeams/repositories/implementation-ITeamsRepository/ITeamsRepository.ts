@@ -1,4 +1,5 @@
-import { CreateTeamsDTO, Teams } from '../../entities/CreateTeams';
+// eslint-disable-next-line prettier/prettier
+import { CreateTeamsDTO, Teams } from '@modules/CreateUserTeams/entities/CreateTeams';
 
 export abstract class ITeamsRepository {
   // eslint-disable-next-line prettier/prettier

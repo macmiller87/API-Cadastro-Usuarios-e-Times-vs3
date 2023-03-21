@@ -1,6 +1,6 @@
+import { IUsersRepository } from '@modules/CreateUsers/repositories/Implementation-IUserRepository/IUsersRepository';
 import { Injectable } from '@nestjs/common';
-import { AppError } from 'src/utils/errors/AppError';
-import { IUsersRepository } from '../../repositories/Implementation-IUserRepository/IUsersRepository';
+import { AppError } from '@utils/errors/AppError';
 
 @Injectable()
 export class DeleteUsers {
