@@ -1,3 +1,6 @@
+import { Replace } from '@utils/helpers/Replace';
+import { randomUUID } from 'node:crypto';
+
 export interface CreateUsersDTO {
   user_id?: string;
   userName: string;
@@ -9,17 +12,25 @@ export interface CreateUsersDTO {
 
 export class Users {
   private userProps?: CreateUsersDTO;
+  private _user_id?: string;
 
-  constructor(createdat?: Date) {
-    this.userProps.createdAt = createdat ?? new Date();
+  constructor(
+    props: Replace<CreateUsersDTO, { createdAt?: Date }>,
+    id?: string,
+  ) {
+    this._user_id = id ?? randomUUID();
+    this.userProps = {
+      ...props,
+      createdAt: props.createdAt ?? new Date(),
+    };
   }
 
   public set user_id(user_id: string) {
-    this.userProps.user_id = user_id;
+    this._user_id = user_id;
   }
 
   public get user_id(): string {
-    return this.userProps.user_id;
+    return this._user_id;
   }
 
   public set userName(userName: string) {

@@ -22,7 +22,7 @@ export class UserController {
   async create(@Body() body: CreateUsersDTO) {
     const { userName, userAvatar, email, password } = body;
 
-    const user = await this.createUsers.execute({
+    const { user } = await this.createUsers.execute({
       userName,
       userAvatar,
       email,

@@ -1,29 +1,23 @@
-// eslint-disable-next-line prettier/prettier
-import { CreateUsersDTO, Users } from '@modules/CreateUsers/entities/CreateUsers';
+/* eslint-disable prettier/prettier */
+import { Users } from '@modules/CreateUsers/entities/CreateUsers';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@database/prisma/prisma.service';
 import { IUsersRepository } from '@modules/CreateUsers/repositories/Implementation-IUserRepository/IUsersRepository';
+import { UserResponseMapper } from '../mapper/UserResponseMapper';
 
 @Injectable()
 export class UsersRepository implements IUsersRepository {
   constructor(private prismaService: PrismaService) {}
 
-  // eslint-disable-next-line prettier/prettier
-   async create({ user_id, userName, userAvatar, email, password }: CreateUsersDTO): Promise<Users> {
-    const user = await this.prismaService.users.create({
-      data: {
-        user_id: user_id,
-        userName: userName,
-        userAvatar: userAvatar,
-        email: email,
-        password: password,
-      },
+   async create(user: Users): Promise<void> {
+    const userDatas = UserResponseMapper.UserRespMapper(user);
+
+    await this.prismaService.users.create({
+      data: userDatas,
       include: {
         teams: true,
       },
     });
-
-    return user;
   }
 
   async findByUsername(userName: string): Promise<Users> {

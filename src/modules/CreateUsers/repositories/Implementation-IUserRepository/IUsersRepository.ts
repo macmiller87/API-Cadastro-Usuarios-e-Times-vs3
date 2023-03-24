@@ -1,9 +1,7 @@
-// eslint-disable-next-line prettier/prettier
-import { CreateUsersDTO, Users } from '@modules/CreateUsers/entities/CreateUsers';
+import { Users } from '@modules/CreateUsers/entities/CreateUsers';
 
 export abstract class IUsersRepository {
-  // eslint-disable-next-line prettier/prettier
-  abstract create({ user_id, userName, userAvatar, email, password }: CreateUsersDTO): Promise<Users>;
+  abstract create(data: Users): Promise<void>;
   abstract findByUsername(userName: string): Promise<Users>;
   abstract findByEmail(email: string): Promise<Users>;
   abstract findByUserId(user_id: string): Promise<Users>;

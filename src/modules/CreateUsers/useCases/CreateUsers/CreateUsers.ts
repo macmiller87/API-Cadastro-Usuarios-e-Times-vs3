@@ -1,17 +1,25 @@
-// eslint-disable-next-line prettier/prettier
-import { CreateUsersDTO, Users } from '@modules/CreateUsers/entities/CreateUsers';
 import { IUsersRepository } from '@modules/CreateUsers/repositories/Implementation-IUserRepository/IUsersRepository';
-import { randomUUID } from 'node:crypto';
+import { Users } from '@modules/CreateUsers/entities/CreateUsers';
 import { Injectable } from '@nestjs/common';
 import { AppError } from '@utils/errors/AppError';
 import { hash } from 'bcryptjs';
 
+interface userCreateRequest {
+  userName: string;
+  userAvatar: string;
+  email: string;
+  password: string;
+}
+
+interface userCreateResponse {
+  user: Users;
+}
 @Injectable()
 export class CreateUsers {
   constructor(private userRepository: IUsersRepository) {}
 
-  // eslint-disable-next-line prettier/prettier
-  async execute({ userName, userAvatar, email, password }: CreateUsersDTO): Promise<Users> {
+  async execute(request: userCreateRequest): Promise<userCreateResponse> {
+    const { userName, userAvatar, email, password } = request;
 
     // eslint-disable-next-line prettier/prettier
     const userAlreadyExists = await this.userRepository.findByUsername(userName);
@@ -22,14 +30,17 @@ export class CreateUsers {
 
     const passwordHash = await hash(password, 8);
 
-    const user = this.userRepository.create({
-      user_id: randomUUID(),
+    const user = new Users({
       userName,
       userAvatar,
       email,
       password: passwordHash,
     });
 
-    return user;
+    await this.userRepository.create(user);
+
+    return {
+      user,
+    };
   }
 }
