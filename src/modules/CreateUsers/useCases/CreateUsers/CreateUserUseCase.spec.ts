@@ -25,7 +25,7 @@ describe('Create a User (Unit tests)', () => {
   it('Should be not be able to Create a User, if Username already exists or in use', async () => {
     await createUser.execute({
       userName: 'Kiko',
-      userAvatar: '',
+      userAvatar: 'Tesouro',
       email: 'tesouuuro@gmail.com',
       password: '6543',
     });
