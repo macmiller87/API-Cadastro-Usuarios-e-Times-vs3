@@ -1,14 +1,18 @@
+import { Replace } from '@utils/helpers/Replace';
 export interface CreateUsersTokenDTO {
   id?: string;
-  user_id: string;
+  user_id?: string;
   createdAt: Date;
 }
 
 export class UserToken {
   private userTokenProps?: CreateUsersTokenDTO;
 
-  constructor(createdAt?: Date) {
-    this.userTokenProps.createdAt = createdAt ?? new Date();
+  constructor(props?: Replace<CreateUsersTokenDTO, { createdAt?: Date }>) {
+    this.userTokenProps = {
+      ...props,
+      createdAt: props.createdAt ?? new Date(),
+    };
   }
 
   public set id(id: string) {
@@ -20,11 +24,11 @@ export class UserToken {
   }
 
   public set user_id(id: string) {
-    this.userTokenProps.user_id = id;
+    this.user_id = id;
   }
 
   public get user_id(): string {
-    return this.userTokenProps.user_id;
+    return this.user_id;
   }
 
   public get createdAt(): Date {
