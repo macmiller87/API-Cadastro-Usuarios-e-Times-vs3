@@ -3,13 +3,13 @@ import 'dotenv/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from '@database/prisma/prisma.service';
 import { UserController } from '@controller/User.controller';
-import { CreateUsers } from '../CreateUsers/CreateUsers';
+import { CreateUsers } from '@modules/CreateUsers/useCases/CreateUsers/CreateUsers';
 import { AuthenticateUsersToken } from './CreateUsersToken';
 import { UserDatabaseModule } from '@database/user_database.module';
 import { UserTokenDatabaseModule } from '@database/userToken-database.module';
-import { ListSpecifcUser } from '../ListUser/ListSpecifcUser';
-import { ListUsersAndTeams } from '../ListUsersAndTeams/ListUsersAndTeams';
-import { DeleteUsers } from '../DeleteUsers/DeleteUsers';
+import { ListSpecifcUser } from '@modules/CreateUsers/useCases/ListUser/ListSpecifcUser';
+import { ListUsersAndTeams } from '@modules/CreateUsers/useCases/ListUsersAndTeams/ListUsersAndTeams';
+import { DeleteUsers } from '@modules/CreateUsers/useCases/DeleteUsers/DeleteUsers';
 import { AppError } from '@utils/errors/AppError';
 
 let prismaService: PrismaService;
@@ -66,7 +66,7 @@ describe('Create a UserToken, (Tests End to End)', () => {
     expect(userTokenAuthenthicate).toHaveProperty('token');
   });
 
-  it('Should be not be able to create a UserToken, if user non exists, or email is incorrect!', async () => {
+  it('Should not be able to Create a UserToken, if user non exists, or email is incorrect!', async () => {
     await createUser.execute({
       userName: 'Mary Tucker',
       userAvatar: 'Tucker',
@@ -82,7 +82,7 @@ describe('Create a UserToken, (Tests End to End)', () => {
     ).rejects.toEqual(new AppError('User Email Not Found or Incorrect !', 404));
   });
 
-  it('Should be not able to Create a User, if Username already exists or in use !', async () => {
+  it('Should not be able to Create a UserToken, if user non exists, or password is incorrect !', async () => {
     const user = await createUser.execute({
       userName: 'Blanche Kim',
       userAvatar: 'Kim',

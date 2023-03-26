@@ -13,18 +13,20 @@ let inMemoryUserTokenRepository: InMemoryUsersTokenRepository;
 let createUserToken: AuthenticateUsersToken;
 
 describe('Create UserToken (Unit tests)', () => {
-  inMemoryUserRepository = new InMemoryUsersRepository();
-  createUser = new CreateUsers(inMemoryUserRepository);
+  beforeEach(async () => {
+    inMemoryUserRepository = new InMemoryUsersRepository();
+    createUser = new CreateUsers(inMemoryUserRepository);
 
-  inMemoryUserTokenRepository = new InMemoryUsersTokenRepository();
-  createUserToken = new AuthenticateUsersToken(
-    inMemoryUserRepository,
-    inMemoryUserTokenRepository,
-  );
+    inMemoryUserTokenRepository = new InMemoryUsersTokenRepository();
+    createUserToken = new AuthenticateUsersToken(
+      inMemoryUserRepository,
+      inMemoryUserTokenRepository,
+    );
+  })
 
   it('Should be able to create a UserToken, if user already exists, and email and password is correct!', async () => {
     const user = await createUser.execute({
-      userName: 'Madruga',
+      userName: 'Madruga teste',
       userAvatar: 'Madruguinha',
       email: 'madruguinha@gmail.com',
       password: '8788',
@@ -34,15 +36,18 @@ describe('Create UserToken (Unit tests)', () => {
       email: user.user.email,
       password: '8788',
     });
-
+    
     expect(201);
-    expect(userTokenAuthenthicate.user).toHaveProperty('userName', 'Madruga');
+    expect(userTokenAuthenthicate.user).toHaveProperty('userName', 'Madruga teste');
     expect(userTokenAuthenthicate.user).toHaveProperty('email', 'madruguinha@gmail.com');
     expect(userTokenAuthenthicate).toHaveProperty('token');
+
+    await inMemoryUserRepository.deleteUser(user.user.user_id);
+    await inMemoryUserTokenRepository.deleteUserId(user.user.user_id);
   });
 
   it('Should be not be able to create a UserToken, if user non exists, or email is incorrect!', async () => {
-    await createUser.execute({
+    const user = await createUser.execute({
       userName: 'Luke Houston',
       userAvatar: 'Houston',
       email: 'ahatalce@arolopa.tf',
@@ -55,6 +60,8 @@ describe('Create UserToken (Unit tests)', () => {
         password: '1221',
       }),
     ).rejects.toEqual(new AppError('User Email Not Found or Incorrect !', 404));
+
+    await inMemoryUserRepository.deleteUser(user.user.user_id);
   });
 
   it('Should be not be able to create a UserToken, if user non exists, or password is incorrect!', async () => {
@@ -71,5 +78,7 @@ describe('Create UserToken (Unit tests)', () => {
         password: 'Fake Password',
       }),
     ).rejects.toEqual(new AppError('Password Incorrect !', 404));
+
+    await inMemoryUserRepository.deleteUser(user.user.user_id);
   });
 });

@@ -7,8 +7,10 @@ let inMemoryUserRepository: InMemoryUsersRepository;
 let createUser: CreateUsers;
 
 describe('Create a User (Unit tests)', () => {
-  inMemoryUserRepository = new InMemoryUsersRepository();
-  createUser = new CreateUsers(inMemoryUserRepository);
+  beforeEach(async () => {
+    inMemoryUserRepository = new InMemoryUsersRepository();
+    createUser = new CreateUsers(inMemoryUserRepository);
+  });
 
   it('Should be able to Create a User', async () => {
     const user = await createUser.execute({
@@ -20,10 +22,12 @@ describe('Create a User (Unit tests)', () => {
     expect(201);
     expect(user.user).toHaveProperty('user_id');
     expect(user.user.email).toMatch('madruguinha@gmail.com');
+
+    await inMemoryUserRepository.deleteUser(user.user.user_id);
   });
 
   it('Should be not be able to Create a User, if Username already exists or in use', async () => {
-    await createUser.execute({
+    const user = await createUser.execute({
       userName: 'Kiko',
       userAvatar: 'Tesouro',
       email: 'tesouuuro@gmail.com',
@@ -38,5 +42,7 @@ describe('Create a User (Unit tests)', () => {
         password: '7887',
       }),
     ).rejects.toEqual(new AppError('User Already Exists!', 404));
+
+    await inMemoryUserRepository.deleteUser(user.user.user_id);
   });
 });

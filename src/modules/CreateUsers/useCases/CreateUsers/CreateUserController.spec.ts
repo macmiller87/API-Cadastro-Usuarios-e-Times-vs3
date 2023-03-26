@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'dotenv/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from '@controller/User.controller';
@@ -60,17 +61,17 @@ describe('Create a User, (Tests End to End)', () => {
 
   it('Should be not able to Create a User, if Username already exists or in use !', async () => {
     await createUser.execute({
-      userName: 'Chaves',
-      userAvatar: 'Chavinho teste',
-      email: 'teste@gmail.com',
-      password: '9988',
+      userName: 'Chiquinha',
+      userAvatar: 'Chiquinha',
+      email: 'chiquinha@gmail.com',
+      password: '8923',
     });
 
     await expect(
       createUser.execute({
-        userName: 'Chaves',
-        userAvatar: 'Chavinho teste',
-        email: 'chavinho@gmail.com',
+        userName: 'Chiquinha',
+        userAvatar: 'Chiquinha teste',
+        email: 'chiquinha@gmail.com',
         password: '1122',
       }),
     ).rejects.toEqual(new AppError('User Already Exists!', 404));

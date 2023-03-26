@@ -15,4 +15,15 @@ export class UsersTokenRepository implements IUsersTokenRepository {
       },
     });
   }
+
+  async deleteUserId(user_id: string): Promise<void> {
+    await this.prismaService.userToken.delete({
+      where: {
+        id: user_id,
+      },
+      include: {
+        user: true,
+      },
+    });
+  }
 }
