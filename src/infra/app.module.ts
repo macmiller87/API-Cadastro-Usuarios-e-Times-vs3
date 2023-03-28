@@ -11,14 +11,13 @@ import { TeamDatabaseModule } from '@database/team-database.module';
 import { DeleteUsers } from '@modules/CreateUsers/useCases/DeleteUsers/DeleteUsers';
 import { AuthenticateUsersToken } from '@modules/CreateUsers/useCases/CreateUsersToken/CreateUsersToken';
 import { UserTokenDatabaseModule } from '@database/userToken-database.module';
-import { ensureUserAuthenticate } from '@utils/auth/EnsureUserAuthenticate';
+import { EnsureUserAuthenticate } from '@utils/auth/EnsureUserAuthenticate';
 import { ListSpecificTeam } from '@modules/CreateUserTeams/useCases/ListTeam/ListSpecificTeam';
 import { DeleteTeam } from '@modules/CreateUserTeams/useCases/DeleteTeams/DeleteTeam';
 
 @Module({
   imports: [UserDatabaseModule, TeamDatabaseModule, UserTokenDatabaseModule],
   controllers: [UserController, TeamController],
-  // eslint-disable-next-line prettier/prettier
   providers: [
     CreateUsers,
     ListSpecifcUser,
@@ -33,9 +32,8 @@ import { DeleteTeam } from '@modules/CreateUserTeams/useCases/DeleteTeams/Delete
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    // eslint-disable-next-line prettier/prettier
     consumer
-      .apply(ensureUserAuthenticate)
+      .apply(EnsureUserAuthenticate)
       .exclude(
         { path: 'users', method: RequestMethod.POST },
         { path: 'users/userToken', method: RequestMethod.POST },
