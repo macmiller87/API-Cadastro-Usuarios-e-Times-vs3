@@ -1,42 +1,35 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
 import 'dotenv/config';
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserController } from '@controller/User.controller';
-import { CreateUsers } from './CreateUsers';
-import { UserDatabaseModule } from '@database/user_database.module';
-import { ListSpecifcUser } from '@modules/CreateUsers/useCases/ListUser/ListSpecifcUser';
-import { ListUsersAndTeams } from '@modules/CreateUsers/useCases/ListUsersAndTeams/ListUsersAndTeams';
-import { DeleteUsers } from '@modules/CreateUsers/useCases/DeleteUsers/DeleteUsers';
-import { AuthenticateUsersToken } from '@modules/CreateUsers/useCases/CreateUsersToken/CreateUsersToken';
-import { UserTokenDatabaseModule } from '@database/userToken-database.module';
 import { PrismaService } from '@database/prisma/prisma.service';
-import { AppError } from '@utils/errors/AppError';
+import * as request from 'supertest';
+import { INestApplication } from '@nestjs/common';
+import { AppModule } from '../../../../infra/app.module';
 
 let prismaService: PrismaService;
-let userController: UserController;
-let createUser: CreateUsers;
+let appModule: AppModule;
+
+let app: INestApplication;
 
 describe('Create a User, (Tests End to End)', () => {
-  beforeEach(async () => {
+
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [UserDatabaseModule, UserTokenDatabaseModule],
-      controllers: [UserController],
-      providers: [
-        CreateUsers,
-        ListSpecifcUser,
-        ListUsersAndTeams,
-        DeleteUsers,
-        AuthenticateUsersToken,
-      ],
+      imports: [AppModule],
     }).compile();
 
     prismaService = module.get<PrismaService>(PrismaService);
-    userController = module.get<UserController>(UserController);
-    createUser = module.get<CreateUsers>(CreateUsers);
+    appModule = module.get<AppModule>(AppModule);
+
+    app = module.createNestApplication({
+      logger: false,
+    });
+    
+    await app.init();
   });
 
   it('Controller should be defined', () => {
-    expect(userController).toBeDefined();
+    expect(appModule).toBeDefined();
   });
 
   afterAll(async () => {
@@ -46,7 +39,7 @@ describe('Create a User, (Tests End to End)', () => {
   });
 
   it('Should be able to Create a User', async () => {
-    const user = await createUser.execute({
+    const user = await request(app.getHttpServer()).post('/users').send({
       userName: 'Chavez',
       userAvatar: 'Chavinho',
       email: 'chaves@gmail.com',
@@ -54,26 +47,27 @@ describe('Create a User, (Tests End to End)', () => {
     });
 
     expect(201);
-    expect(user.user.userName).toBe('Chavez');
-    expect(user.user).toHaveProperty('user_id');
-    expect(user.user.email).toMatch('chaves@gmail.com');
+    expect(user.body).toHaveProperty('_user_id');
+    expect(user.body.userProps.userName).toBe('Chavez');
+    expect(user.body.userProps.email).toMatch('chaves@gmail.com');
   });
 
   it('Should be not able to Create a User, if Username already exists or in use !', async () => {
-    await createUser.execute({
+    await request(app.getHttpServer()).post('/users').send({
       userName: 'Chiquinha',
       userAvatar: 'Chiquinha',
       email: 'chiquinha@gmail.com',
       password: '8923',
     });
 
-    await expect(
-      createUser.execute({
-        userName: 'Chiquinha',
-        userAvatar: 'Chiquinha teste',
-        email: 'chiquinha@gmail.com',
-        password: '1122',
-      }),
-    ).rejects.toEqual(new AppError('User Already Exists!', 404));
+    const user = await request(app.getHttpServer()).post('/users').send({
+      userName: 'Chiquinha',
+      userAvatar: 'Chiquinha teste',
+      email: 'chiquinha@gmail.com',
+      password: '1122',
+    });
+    
+    expect(user.body).toStrictEqual({ statusCode: 404, message: 'User Already Exists!' });
   });
+
 });
