@@ -1,5 +1,5 @@
 // eslint-disable-next-line prettier/prettier
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
 import { CreateUsersDTO } from '@modules/CreateUsers/dtosClassValidation/CreateUsersDTO';
 import { CreateUserTokenDTO } from '@modules/CreateUsers/dtosClassValidation/CreateUserTokenDTO';
 import { AuthenticateUsersToken } from '@modules/CreateUsers/useCases/CreateUsersToken/CreateUsersToken';
@@ -47,15 +47,15 @@ export class UserController {
     };
   }
 
-  @Get('listSpecificUser/:user_id')
-  async listUser(@Param('user_id') user_id: string) {
+  @Get('listSpecificUser')
+  async listUser(@Query('user_id') user_id: string) {
     const userById = await this.listSpecifcUser.execute(user_id);
 
     return userById;
   }
 
-  @Get('listUserAndTeams/:user_id')
-  async listUserAndTeam(@Param('user_id') user_id: string) {
+  @Get('listUserAndTeams')
+  async listUserAndTeam(@Query('user_id') user_id: string) {
     const user = await this.listUserAndTeams.execute(user_id);
 
     return user;
