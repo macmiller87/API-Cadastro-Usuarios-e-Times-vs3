@@ -47,7 +47,7 @@ describe('List Specific User, (Tests End to End)', () => {
         });
 
         const createUsertoken = await request(app.getHttpServer()).post('/users/userToken').send({
-          email: user.body.userProps.email,
+          email: 'ri@kete.pk',
           password: '1122'
         });
 
@@ -74,7 +74,7 @@ describe('List Specific User, (Tests End to End)', () => {
       });
 
       const createUsertoken = await request(app.getHttpServer()).post('/users/userToken').send({
-        email: user.body.userProps.email,
+        email: 'joh@huofbaz.nf',
         password: '7822'
       });
 
@@ -99,7 +99,7 @@ describe('List Specific User, (Tests End to End)', () => {
       });
 
       const createUsertoken = await request(app.getHttpServer()).post('/users/userToken').send({
-        email: user.body.userProps.email,
+        email: 'nod@wiwa.ad',
         password: '6742'
       });
 

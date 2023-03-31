@@ -47,7 +47,7 @@ describe('ListUserAndTeams, (Tests End to End)', () => {
     });
 
     const createUsertoken = await request(app.getHttpServer()).post('/users/userToken').send({
-      email: user.body.userProps.email,
+      email: 'fetsi@ote.fm',
       password: '8899'
     });
 
@@ -74,7 +74,7 @@ describe('ListUserAndTeams, (Tests End to End)', () => {
     });
 
     const createUsertoken = await request(app.getHttpServer()).post('/users/userToken').send({
-      email: user.body.userProps.email,
+      email: 'sodbid@mowsoit.ki',
       password: '4399'
     });
 
@@ -92,14 +92,14 @@ describe('ListUserAndTeams, (Tests End to End)', () => {
 
   it('Should be able to List a UserAndTeams, if user not have a valid! (Token) !', async () => {
     const user = await request(app.getHttpServer()).post('/users').send({
-      userName: 'Kevin Lawrence',
-      userAvatar: 'Lawrence',
-      email: 'sodbid@mowsoit.ki',
+      userName: 'Effie Baker',
+      userAvatar: 'Baker',
+      email: 'bozema@lucusaf.rs',
       password: '4399',
     });
 
     const createUsertoken = await request(app.getHttpServer()).post('/users/userToken').send({
-      email: user.body._user_id,
+      email: 'bozema@lucusaf.rs',
       password: '4399'
     });
 

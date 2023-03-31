@@ -46,7 +46,7 @@ describe('Create a UserToken, (Tests End to End)', () => {
     });
 
     const userTokenAuthenthicate = await request(app.getHttpServer()).post('/users/userToken').send({
-      email: user.body.userProps.email,
+      email: 'madruguinha@gmail.com',
       password: '7945',
     });
 
@@ -81,7 +81,7 @@ describe('Create a UserToken, (Tests End to End)', () => {
     });
 
     const userToken = await request(app.getHttpServer()).post('/users/userToken').send({
-      email: user.body.userProps.email,
+      email: 'pasrujuh@ofapav.ne',
       password: 'Fake Password',
     });
 
