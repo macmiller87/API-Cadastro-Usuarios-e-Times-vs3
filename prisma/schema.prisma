@@ -22,7 +22,7 @@ model Users {
 }
 
 model Teams {
-  team_id   String   @id @default(uuid())
+  team_id   String   @id
   user_id   String
   TeamName  String   @unique
   city      String

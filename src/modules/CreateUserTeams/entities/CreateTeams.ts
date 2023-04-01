@@ -1,3 +1,6 @@
+import { Replace } from '@utils/helpers/Replace';
+import { randomUUID } from 'node:crypto';
+
 export interface CreateTeamsDTO {
   team_id?: string;
   teamName: string;
@@ -9,9 +12,25 @@ export interface CreateTeamsDTO {
 
 export class Teams {
   private teamsProps?: CreateTeamsDTO;
+  private _team_id?: string;
 
-  constructor(createdAt?: Date) {
-    this.teamsProps.createdAt = createdAt ?? new Date();
+  constructor(
+    props: Replace<CreateTeamsDTO, { createdAt?: Date }>,
+    id?: string,
+  ) {
+    this._team_id = id ?? randomUUID();
+    this.teamsProps = {
+      ...props,
+      createdAt: props.createdAt ?? new Date(),
+    };
+  }
+
+  public set team_id(id: string) {
+    this._team_id = id;
+  }
+
+  public get team_id(): string {
+    return this._team_id;
   }
 
   public set TeamName(teamName: string) {

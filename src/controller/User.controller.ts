@@ -1,5 +1,5 @@
 // eslint-disable-next-line prettier/prettier
-import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { CreateUsersDTO } from '@modules/CreateUsers/dtosClassValidation/CreateUsersDTO';
 import { CreateUserTokenDTO } from '@modules/CreateUsers/dtosClassValidation/CreateUserTokenDTO';
 import { AuthenticateUsersToken } from '@modules/CreateUsers/useCases/CreateUsersToken/CreateUsersToken';
@@ -61,8 +61,8 @@ export class UserController {
     return user;
   }
 
-  @Delete('deleteUser/:user_id')
-  async DeleteUsers(@Param('user_id') user_id: string) {
+  @Delete('deleteUser')
+  async DeleteUsers(@Query('user_id') user_id: string) {
     await this.deleteUser.execute(user_id);
   }
 }

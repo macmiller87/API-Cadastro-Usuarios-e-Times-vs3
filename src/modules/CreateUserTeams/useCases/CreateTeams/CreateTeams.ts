@@ -1,9 +1,20 @@
-// eslint-disable-next-line prettier/prettier
-import { CreateTeamsDTO, Teams } from '@modules/CreateUserTeams/entities/CreateTeams';
+/* eslint-disable prettier/prettier */
+import { Teams } from '@modules/CreateUserTeams/entities/CreateTeams';
 import { ITeamsRepository } from '@modules/CreateUserTeams/repositories/implementation-ITeamsRepository/ITeamsRepository';
 import { Injectable } from '@nestjs/common';
 import { AppError } from '@utils/errors/AppError';
 import { IUsersRepository } from '@modules/CreateUsers/repositories/Implementation-IUserRepository/IUsersRepository';
+
+export interface teamsCreateRequest {
+  teamName: string;
+  city: string;
+  country: string;
+  user_id: string;
+}
+
+export interface teamsCreateResponse {
+  team: Teams;
+}
 
 @Injectable()
 export class CreateTeams {
@@ -12,8 +23,9 @@ export class CreateTeams {
     private usersRepository: IUsersRepository,
   ) {}
 
-  // eslint-disable-next-line prettier/prettier
-  async execute({ teamName, city, country, user_id }: CreateTeamsDTO ): Promise<Teams> {
+  async execute(request: teamsCreateRequest): Promise<teamsCreateResponse> {
+    const { teamName, city, country, user_id } = request;
+    
     const user = await this.usersRepository.findByUserId(user_id);
 
     const teamAlreadyExists = await this.teamsRepository.findByTeamName(
@@ -24,13 +36,17 @@ export class CreateTeams {
       throw new AppError('Team Already Exists!', 404);
     }
 
-    const team = await this.teamsRepository.create({
-      teamName: teamName,
-      city: city,
-      country: country,
+    const team = new Teams({
+      teamName,
+      city,
+      country,
       user_id: user.user_id,
     });
 
-    return team;
+    await this.teamsRepository.create(team);
+
+    return {
+      team
+    };
   }
 }

@@ -1,5 +1,5 @@
 // eslint-disable-next-line prettier/prettier
-import { Body, Controller, Delete, Get, Param, Post, Request } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, Request } from '@nestjs/common';
 import { CreateTeams } from '@modules/CreateUserTeams/useCases/CreateTeams/CreateTeams';
 import { DeleteTeam } from '@modules/CreateUserTeams/useCases/DeleteTeams/DeleteTeam';
 import { ListSpecificTeam } from '@modules/CreateUserTeams/useCases/ListTeam/ListSpecificTeam';
@@ -14,12 +14,11 @@ export class TeamController {
   ) {}
 
   @Post()
-  // eslint-disable-next-line prettier/prettier
   async create(@Body() body: CreateTeamsDTO, @Request() request) {
     const { user_id } = request.user;
     const { teamName, city, country } = body;
 
-    const team = await this.createTeam.execute({
+    const { team } = await this.createTeam.execute({
       teamName,
       city,
       country,
@@ -29,8 +28,8 @@ export class TeamController {
     return team;
   }
 
-  @Get('listSpecificTeam/:team_id')
-  async listTeam(@Param('team_id') team_id: string) {
+  @Get('listSpecificTeam')
+  async listTeam(@Query('team_id') team_id: string) {
     const team = await this.listSpecificTeam.execute(team_id);
 
     return team;
