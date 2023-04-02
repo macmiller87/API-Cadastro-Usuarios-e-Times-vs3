@@ -1,5 +1,5 @@
 // eslint-disable-next-line prettier/prettier
-import { Body, Controller, Delete, Get, Param, Post, Query, Request } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query, Request } from '@nestjs/common';
 import { CreateTeams } from '@modules/CreateUserTeams/useCases/CreateTeams/CreateTeams';
 import { DeleteTeam } from '@modules/CreateUserTeams/useCases/DeleteTeams/DeleteTeam';
 import { ListSpecificTeam } from '@modules/CreateUserTeams/useCases/ListTeam/ListSpecificTeam';
@@ -35,8 +35,8 @@ export class TeamController {
     return team;
   }
 
-  @Delete('deleteTeam/:team_id')
-  async DeleteTeam(@Param('team_id') team_id: string) {
+  @Delete('deleteTeam')
+  async DeleteTeam(@Query('team_id') team_id: string) {
     await this.deleteTeam.execute(team_id);
   }
 }
