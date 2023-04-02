@@ -1,9 +1,20 @@
 ## API de Cadastro de Usuarios e Times Vs3
 
 <h3 align="center">
-  <img src="screens/documentacao1.png" alt="demostração" />
-  <img src="screens/documentacao2.png" alt="demostração" />
+  <img src="screens/Documentacao1.png" alt="demostração" />
+  <img src="screens/Documentacao2.png" alt="demostração" />
 </h3>
+
+## 🚀 **Tecnologias**
+
+- Typescript
+- Nodejs
+- Nestjs
+- Prisma
+- JsonWebToken
+- Jest
+- Swagger
+- Postgres
 
 ### 💻 Projeto
 
