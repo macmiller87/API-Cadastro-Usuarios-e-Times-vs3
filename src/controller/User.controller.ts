@@ -7,6 +7,7 @@ import { CreateUsers } from '@modules/CreateUsers/useCases/CreateUsers/CreateUse
 import { DeleteUsers } from '@modules/CreateUsers/useCases/DeleteUsers/DeleteUsers';
 import { ListSpecifcUser } from '@modules/CreateUsers/useCases/ListUser/ListSpecifcUser';
 import { ListUsersAndTeams } from '@modules/CreateUsers/useCases/ListUsersAndTeams/ListUsersAndTeams';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('users')
 export class UserController {
@@ -47,6 +48,7 @@ export class UserController {
     };
   }
 
+  @ApiBearerAuth()
   @Get('listSpecificUser')
   async listUser(@Query('user_id') user_id: string) {
     const userById = await this.listSpecifcUser.execute(user_id);
@@ -54,6 +56,7 @@ export class UserController {
     return userById;
   }
 
+  @ApiBearerAuth()
   @Get('listUserAndTeams')
   async listUserAndTeam(@Query('user_id') user_id: string) {
     const user = await this.listUserAndTeams.execute(user_id);
@@ -61,6 +64,7 @@ export class UserController {
     return user;
   }
 
+  @ApiBearerAuth()
   @Delete('deleteUser')
   async DeleteUsers(@Query('user_id') user_id: string) {
     await this.deleteUser.execute(user_id);

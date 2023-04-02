@@ -4,7 +4,9 @@ import { CreateTeams } from '@modules/CreateUserTeams/useCases/CreateTeams/Creat
 import { DeleteTeam } from '@modules/CreateUserTeams/useCases/DeleteTeams/DeleteTeam';
 import { ListSpecificTeam } from '@modules/CreateUserTeams/useCases/ListTeam/ListSpecificTeam';
 import { CreateTeamsDTO } from '@modules/CreateUserTeams/dtosClassValidation/CreateTeamsDTO';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @Controller('teams')
 export class TeamController {
   constructor(
