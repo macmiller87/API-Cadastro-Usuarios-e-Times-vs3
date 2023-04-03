@@ -5,10 +5,13 @@
   "author": "Macmiller Duarte - macamagolf@gmail.com",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "nest start -H 0.0.0.0",
     "start:dev": "dotenv -e .env.development nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node main.js",
