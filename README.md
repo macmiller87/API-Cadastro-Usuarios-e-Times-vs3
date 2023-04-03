@@ -95,3 +95,7 @@
 ## Para rodar a Documentação da Aplicação
 
 - Com a aplicação já startada .... No seu navegador de internet digite => `http://localhost:8080/api-doc`
+
+## Deploy Render
+
+- `https://api-de-cadastro-de-usuarios-e-times-vs3.onrender.com/`, para utilizar o deploy, deve-se colocar /+ path da rota a fazer a requizição .... exemplo url/users => para rota createUser Post .... etc.
