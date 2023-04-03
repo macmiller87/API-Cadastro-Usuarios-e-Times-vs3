@@ -11,7 +11,7 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start -H 0.0.0.0",
+    "start": "nest start /src/node_modules/nest/bin",
     "start:dev": "dotenv -e .env.development nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node main.js",
