@@ -101,3 +101,9 @@
 - Para utilizar o deploy, deve-se colocar /+ path da rota a fazer a requizição .... exemplo url/users => para rota createUser Post .... etc.
 
 https://api-de-cadastro-de-usuarios-e-times-vs3.onrender.com
+
+## Doc deploy Render
+
+- Você pode testar o funcionamento diretamente na documentação do projeto.
+
+https://api-de-cadastro-de-usuarios-e-times-vs3.onrender.com/api-doc
